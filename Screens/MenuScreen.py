@@ -36,3 +36,8 @@ class MenuScreen:
         elif key == arcade.key.DOWN:
             self.focused = (self.focused + 1) % len(self.items)
             self.highlight.move(self.menu.items[self.focused])
+
+    def mousemove(self, x, y, dx, dy):
+        covered = self.highlight.mouseMove(x, y, self.menu.items)
+        if covered != None:
+            self.focused = covered[0]

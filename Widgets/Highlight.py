@@ -12,7 +12,16 @@ class Highlight:
     def move(self, widget):
         self.x = widget.x - 15
         self.y = widget.y + (widget.height - widget.fontSize) / 2
-        print(self.x, self.y)
+    
+    def mouseMove(self, x, y, widgets):
+        for index, widget in enumerate(widgets):
+            if (widget.x <= x and widget.x + widget.width >= x and
+                    widget.y <= y and widget.y + widget.height >= y):
+
+                self.move(widget)
+                return [index, widget]
+        
+        return None
 
     def draw(self):
         arcade.draw_text(

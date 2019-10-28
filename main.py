@@ -29,6 +29,9 @@ class Window(arcade.Window):
     
     def on_key_press(self, key, modifiers):
         self.screens['current'].keypress(key, modifiers)
+    
+    def on_mouse_motion(self, x, y, dx, dy):
+        self.screens['current'].mousemove(x, y, dx, dy)
 
 window = Window(SCREEN_WIDTH, SCREEN_HEIGHT)
 arcade.run()
