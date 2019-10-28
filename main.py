@@ -20,11 +20,15 @@ class Window(arcade.Window):
         self.screens = {
             'menu': MenuScreen(self)
         }
+        self.screens['current'] = self.screens['menu']
 
     def on_draw(self):
         arcade.start_render()
-        self.screens['menu'].draw()
+        self.screens['current'].draw()
         arcade.finish_render()
+    
+    def on_key_press(self, key, modifiers):
+        self.screens['current'].keypress(key, modifiers)
 
 window = Window(SCREEN_WIDTH, SCREEN_HEIGHT)
 arcade.run()
