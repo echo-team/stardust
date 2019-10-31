@@ -14,7 +14,7 @@ os.chdir(file_path)
 
 class Lvl_2(arcade.View):
 
-    def __init__(self, s):
+    def __init__(self):
         super().__init__()
 
         self.time_taken = 0
@@ -31,7 +31,7 @@ class Lvl_2(arcade.View):
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
         self.player_list.append(self.player_sprite)
-        self.score = s
+        self.score = 0
         self.level = 2
         self.hp = 3
         self.time = time.time()
@@ -67,6 +67,10 @@ class Lvl_2(arcade.View):
 
             self.bonus_coin_list.append(bonus_coin)
 
+    def show(self, score):
+        self.score = score
+        arcade.get_window().show_view(self)
+        
     def on_show(self):
         arcade.set_background_color(arcade.color.BLACK_OLIVE)
         # Don't show the mouse cursor
@@ -155,5 +159,4 @@ class Lvl_2(arcade.View):
             self.hp += 1
 
         if self.time2 == 10:
-            lvl3 = Lvl_3(self.score)
-            self.window.show_view(lvl3)
+            self.window.screens['level3'].show(self.score)

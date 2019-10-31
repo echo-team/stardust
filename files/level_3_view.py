@@ -15,7 +15,7 @@ os.chdir(file_path)
 
 class Lvl_3(arcade.View):
 
-    def __init__(self, b):
+    def __init__(self):
         super().__init__()
 
         self.time_taken = 0
@@ -33,7 +33,7 @@ class Lvl_3(arcade.View):
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
         self.player_list.append(self.player_sprite)
-        self.bullet_amount = b
+        self.bullet_amount = 0
         self.boss_hp = 20
         self.hp = 0
         self.level = 3
@@ -43,6 +43,11 @@ class Lvl_3(arcade.View):
         boss.center_x = SCREEN_WIDTH / 2
         boss.center_y = SCREEN_HEIGHT - boss.height / 4
         self.boss_list.append(boss)
+    
+    def show(self, bullet_amount):
+        self.bullet_amount = bullet_amount
+        self.hp = 20
+        arcade.get_window().show_view(self)
 
     def on_show(self):
         arcade.set_background_color(arcade.color.BLACK)
@@ -190,12 +195,10 @@ class Lvl_3(arcade.View):
             bullet.remove_from_sprite_lists()
 
         self.bullet_list.update()
-        """
+        
         if self.hp == 0:
-            gameover = GameOverView()
-            self.window.show_view(gameover)
+            self.window.screens['gameover'].show()
 
         if self.boss_hp == 0:
-            victory = VictoryView()
-            self.window.show_view(victory)
-        """
+            self.window.screens['victory'].show()
+        

@@ -43,6 +43,8 @@ class Lvl_1(arcade.View):
             # Add the coin to the lists
             self.coin_list.append(coin)
 
+    def show(self):
+        arcade.get_window().show_view(self)
 
     def on_show(self):
         arcade.set_background_color(arcade.color.BLACK_OLIVE)
@@ -117,6 +119,5 @@ class Lvl_1(arcade.View):
 
         if len(self.coin_list) == 0 and self.level == 1:
             self.level += 1
-            lvl2 = Lvl_2(self.score)
-            self.window.show_view(lvl2)
+            self.window.screens['level2'].show(self.score)
 
