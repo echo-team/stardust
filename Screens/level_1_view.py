@@ -1,9 +1,8 @@
 import arcade
 import random
 import os
-from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPRITE_SCALING_COIN, SPRITE_SCALING_PLAYER, MOVEMENT_SPEED
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPRITE_SCALING_COIN, SPRITE_SCALING_PLAYER, MOVEMENT_SPEED
 from Coin_Folder.coin import Coin
-from level_2_view import Lvl_2
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
@@ -20,7 +19,7 @@ class Lvl_1(arcade.View):
         self.coin_list = arcade.SpriteList()
 
         # Set up the player info
-        self.player_sprite = arcade.Sprite("sprites/tyan.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("../assets/images/tyan.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_sprite.change_x = 0
@@ -32,7 +31,7 @@ class Lvl_1(arcade.View):
         # Create the coins
         for i in range(20):
             # Create the coin instance
-            coin = Coin("sprites/hooi_dlya_tyan.png", SPRITE_SCALING_COIN)
+            coin = Coin("../assets/images/hooi_dlya_tyan.png", SPRITE_SCALING_COIN)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
@@ -43,6 +42,8 @@ class Lvl_1(arcade.View):
             # Add the coin to the lists
             self.coin_list.append(coin)
 
+    def show(self):
+        arcade.get_window().show_view(self)
 
     def on_show(self):
         arcade.set_background_color(arcade.color.BLACK_OLIVE)
@@ -117,6 +118,5 @@ class Lvl_1(arcade.View):
 
         if len(self.coin_list) == 0 and self.level == 1:
             self.level += 1
-            lvl2 = Lvl_2(self.score)
-            self.window.show_view(lvl2)
+            self.window.screens['level2'].show(self.score)
 

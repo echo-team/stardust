@@ -2,7 +2,7 @@ import arcade
 import os
 import math
 
-from game.constants import SCREEN_WIDTH, SCREEN_TITLE, SCREEN_HEIGHT, SPRITE_SCALING_PLAYER, SPRITE_SCALING_LASER_BOSS, \
+from constants import SCREEN_WIDTH, SCREEN_TITLE, SCREEN_HEIGHT, SPRITE_SCALING_PLAYER, SPRITE_SCALING_LASER_BOSS, \
     SPRITE_SCALING_BOSS, SPRITE_SCALING_COIN, SPRITE_SCALING_LASER, MOVEMENT_SPEED, \
     BULLET_SPEED, BOSS_BULLET_SPEED
 #from game_over_view import GameOverView
@@ -15,7 +15,7 @@ os.chdir(file_path)
 
 class Lvl_3(arcade.View):
 
-    def __init__(self, b):
+    def __init__(self):
         super().__init__()
 
         self.time_taken = 0
@@ -27,22 +27,27 @@ class Lvl_3(arcade.View):
         self.bullet_boss_list = arcade.SpriteList()
 
         # Set up the player info
-        self.player_sprite = arcade.Sprite("sprites/tyan.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("../assets/images/tyan.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
         self.player_list.append(self.player_sprite)
-        self.bullet_amount = b
+        self.bullet_amount = 0
         self.boss_hp = 20
         self.hp = 0
         self.level = 3
 
         # Create the boss
-        boss = arcade.Sprite("sprites/boss.png", SPRITE_SCALING_BOSS)
+        boss = arcade.Sprite("../assets/images/boss.png", SPRITE_SCALING_BOSS)
         boss.center_x = SCREEN_WIDTH / 2
         boss.center_y = SCREEN_HEIGHT - boss.height / 4
         self.boss_list.append(boss)
+    
+    def show(self, bullet_amount):
+        self.bullet_amount = bullet_amount
+        self.hp = 20
+        arcade.get_window().show_view(self)
 
     def on_show(self):
         arcade.set_background_color(arcade.color.BLACK)
@@ -76,7 +81,7 @@ class Lvl_3(arcade.View):
 
     def on_mouse_press(self, x, y, button, modifiers):
 
-        bullet = arcade.Sprite("sprites/laser.png", SPRITE_SCALING_LASER)
+        bullet = arcade.Sprite("../assets/images/laser.png", SPRITE_SCALING_LASER)
         bullet.center_x = self.player_sprite.center_x
         bullet.center_y = self.player_sprite.center_y
         bullet.change_y = BULLET_SPEED
@@ -93,7 +98,7 @@ class Lvl_3(arcade.View):
         elif key == arcade.key.DOWN:
             self.player_sprite.change_y = -MOVEMENT_SPEED
         elif key == arcade.key.SPACE and self.level == 3:
-            bullet = arcade.Sprite("sprites/laser.png", SPRITE_SCALING_LASER)
+            bullet = arcade.Sprite("../assets/images/laser.png", SPRITE_SCALING_LASER)
             bullet.center_x = self.player_sprite.center_x
             bullet.center_y = self.player_sprite.center_y + 30
             bullet.change_y = BULLET_SPEED
@@ -159,7 +164,7 @@ class Lvl_3(arcade.View):
 
             # Shoot every 60 frames change of shooting each frame
             if self.frame_count % 60 == 0:
-                bullet_boss = arcade.Sprite("sprites/laser_boss.png", SPRITE_SCALING_LASER_BOSS)
+                bullet_boss = arcade.Sprite("../assets/images/laser_boss.png", SPRITE_SCALING_LASER_BOSS)
                 bullet_boss.center_x = start_x
                 bullet_boss.center_y = start_y
 
@@ -190,12 +195,10 @@ class Lvl_3(arcade.View):
             bullet.remove_from_sprite_lists()
 
         self.bullet_list.update()
-        """
+        
         if self.hp == 0:
-            gameover = GameOverView()
-            self.window.show_view(gameover)
+            self.window.screens['gameover'].show()
 
         if self.boss_hp == 0:
-            victory = VictoryView()
-            self.window.show_view(victory)
-        """
+            self.window.screens['victory'].show()
+        

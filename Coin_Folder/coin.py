@@ -1,6 +1,6 @@
 import arcade
 import os
-from game.constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)

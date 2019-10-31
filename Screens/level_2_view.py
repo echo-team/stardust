@@ -3,10 +3,9 @@ import random
 import os
 import math
 import time
-from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPRITE_SCALING_COIN, SPRITE_SCALING_PLAYER, MOVEMENT_SPEED
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPRITE_SCALING_COIN, SPRITE_SCALING_PLAYER, MOVEMENT_SPEED
 from Coin_Folder.coin import Coin
 from Coin_Folder.bonus_coin import Bonus_Coin
-from level_3_view import Lvl_3
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
@@ -14,7 +13,7 @@ os.chdir(file_path)
 
 class Lvl_2(arcade.View):
 
-    def __init__(self, s):
+    def __init__(self):
         super().__init__()
 
         self.time_taken = 0
@@ -25,13 +24,13 @@ class Lvl_2(arcade.View):
         self.bonus_coin_list = arcade.SpriteList()
 
         # Set up the player info
-        self.player_sprite = arcade.Sprite("sprites/tyan.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("../assets/images/tyan.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
         self.player_list.append(self.player_sprite)
-        self.score = s
+        self.score = 0
         self.level = 2
         self.hp = 3
         self.time = time.time()
@@ -40,7 +39,7 @@ class Lvl_2(arcade.View):
         # Create the coins
         for i in range(25):
             # Create the coin instance
-            coin = Coin("sprites/hooi_dlya_tyan.png", SPRITE_SCALING_COIN)
+            coin = Coin("../assets/images/hooi_dlya_tyan.png", SPRITE_SCALING_COIN)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
@@ -53,7 +52,7 @@ class Lvl_2(arcade.View):
 
         for i in range(4):
             # Create the coin instance
-            bonus_coin = Bonus_Coin("sprites/bonus_hooi.png", SPRITE_SCALING_COIN)
+            bonus_coin = Bonus_Coin("../assets/images/bonus_hooi.png", SPRITE_SCALING_COIN)
 
             # Position the center of the circle the coin will orbit
             bonus_coin.circle_center_x = random.randrange(SCREEN_WIDTH)
@@ -67,6 +66,10 @@ class Lvl_2(arcade.View):
 
             self.bonus_coin_list.append(bonus_coin)
 
+    def show(self, score):
+        self.score = score
+        arcade.get_window().show_view(self)
+        
     def on_show(self):
         arcade.set_background_color(arcade.color.BLACK_OLIVE)
         # Don't show the mouse cursor
@@ -155,5 +158,4 @@ class Lvl_2(arcade.View):
             self.hp += 1
 
         if self.time2 == 10:
-            lvl3 = Lvl_3(self.score)
-            self.window.show_view(lvl3)
+            self.window.screens['level3'].show(self.score)
