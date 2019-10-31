@@ -1,31 +1,16 @@
 import arcade
-import structure
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_TITLE
+from Screens import Instruction
 
-from MenuScreen import MenuScreen
 
-# TODO: remove for Linux
-from ctypes import windll
-windll.shcore.SetProcessDpiAwareness(1)
+def main():
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    menu_view = Instruction()
+    window.total_score = 0
+    window.level = 1
+    window.show_view(menu_view)
+    arcade.run()
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
 
-class Window(arcade.Window):
-
-    def __init__(self, width, height):
-        super().__init__(width, height)
-
-        arcade.set_background_color(arcade.color.BLACK)
-
-        self.screens = {
-            'menu': MenuScreen(self)
-        }
-
-    def on_draw(self):
-        arcade.start_render()
-        self.screens['menu'].draw()
-        arcade.finish_render()
-
-window = Window(SCREEN_WIDTH, SCREEN_HEIGHT)
-arcade.run()
-
+if __name__ == "__main__":
+    main()
