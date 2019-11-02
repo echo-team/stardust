@@ -8,7 +8,7 @@ from Widgets.Highlight import Highlight
 class MenuScreen(arcade.View):
 
     def __init__(self, window):
-        font = ImageFont.truetype('arial.ttf', 15)
+        font = ImageFont.truetype('../assets/fonts/source_code_pro.ttf', 15)
         itemWidth, itemHeight = font.getsize('Hight scores')
         itemHeight += 10
 

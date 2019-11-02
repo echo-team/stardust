@@ -26,4 +26,5 @@ class Highlight:
     def draw(self):
         arcade.draw_text(
             '>', self.x, self.y,
-            arcade.color.WHITE, self.fontSize)
+            arcade.color.WHITE, self.fontSize,
+            font_name = '../assets/fonts/source_code_pro.ttf')
