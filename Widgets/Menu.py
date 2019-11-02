@@ -21,7 +21,7 @@ class Menu:
 
     def __init__(self, x, y, itemWidth, itemHeight):
         self.x = x
-        self.y = arcade.get_window().get_size()[1] - y
+        self.y = y
         self.itemWidth = itemWidth
         self.itemHeight = itemHeight
         self.items = []
