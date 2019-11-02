@@ -25,6 +25,11 @@ class MenuScreen(arcade.View):
         self.subtitle = { 'x': self.title['x'] + titleWidth, 'y': self.title['y'] - titleHeight }
         self.subtitleText = 'DUST'
 
+        self.score = None
+        self.scoreFontSize = 15
+        self.scorePosition = { 'x': self.title['x'] + titleWidth + 20, 'y': self.title['y'] + titleHeight / 2 + 8 }
+        self.scoreNumber = { 'x': self.scorePosition['x'], 'y': self.title['y'] + 8 }
+
         self.focused = 0
         self.highlight = Highlight()
 
@@ -48,9 +53,10 @@ class MenuScreen(arcade.View):
             self.window.show_view(self.previousScreen)
     
     def start(self):
+        self.score = None
         self.window.screens['instruction'].show()
     
-    def show(self, previousScreen, victory = None):
+    def show(self, previousScreen, victory = None, score = 0):
         self.previousScreen = previousScreen
         self.window.show_view(self)
 
@@ -60,6 +66,7 @@ class MenuScreen(arcade.View):
         elif victory:
             self.titleText = 'YOU'
             self.subtitleText = 'WIN'
+            self.score = score if score > 0 else None
         else:
             self.titleText = 'GAME'
             self.subtitleText = 'OVER'
@@ -72,6 +79,15 @@ class MenuScreen(arcade.View):
         arcade.draw_text(
             self.subtitleText, self.subtitle['x'], self.subtitle['y'],
             arcade.color.WHITE, self.titleFontSize, font_name="../assets/fonts/lemon_milk.otf")
+        
+        if self.score != None:
+            arcade.draw_text(
+                'score:', self.scorePosition['x'], self.scorePosition['y'],
+                arcade.color.WHITE, self.scoreFontSize, font_name="../assets/fonts/source_code_pro.ttf")
+            arcade.draw_text(
+                str(self.score), self.scoreNumber['x'], self.scoreNumber['y'],
+                arcade.color.WHITE, self.scoreFontSize, font_name="../assets/fonts/source_code_pro.ttf")
+
 
         self.menu.draw()
         self.highlight.draw()

@@ -196,8 +196,8 @@ class Lvl_3(GameScreen):
         self.bullet_list.update()
         
         if self.hp == 0:
-            self.window.screens['menu'].show(None, victory=False)
+            self.window.screens['menu'].show(None, victory = False)
 
         if self.boss_hp == 0:
-            self.window.screens['victory'].show(None, victory=True)
+            self.window.screens['menu'].show(None, victory = True, score = self.hp)
         
