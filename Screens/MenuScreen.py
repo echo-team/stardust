@@ -32,7 +32,6 @@ class MenuScreen(arcade.View):
         arcade.start_render()
         self.menu.draw()
         self.highlight.draw()
-        arcade.finish_render()
     
     def on_key_press(self, key, modifier):
         if key == arcade.key.UP:

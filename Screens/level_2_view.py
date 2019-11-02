@@ -3,7 +3,9 @@ import random
 import os
 import math
 import time
+
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPRITE_SCALING_COIN, SPRITE_SCALING_PLAYER, MOVEMENT_SPEED
+from Screens.GameScreen import GameScreen
 from Coin_Folder.coin import Coin
 from Coin_Folder.bonus_coin import Bonus_Coin
 
@@ -11,7 +13,7 @@ file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
 
 
-class Lvl_2(arcade.View):
+class Lvl_2(GameScreen):
 
     def __init__(self):
         super().__init__()
@@ -100,6 +102,8 @@ class Lvl_2(arcade.View):
         self.player_sprite.center_y = y
 
     def on_key_press(self, key, modifiers):
+        super().show_menu_if_esc(key)
+
         # Called whenever the user presses a key.
         if key == arcade.key.LEFT:
             self.player_sprite.change_x = -MOVEMENT_SPEED
