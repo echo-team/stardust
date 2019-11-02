@@ -71,7 +71,7 @@ class Lvl_1(GameScreen):
         self.player_sprite.center_y = y
 
     def on_key_press(self, key, modifiers):
-        super().show_menu_if_esc(key)
+        super().show_menu_if_esc(key, self)
 
         # Called whenever the user presses a key.
         if key == arcade.key.LEFT:

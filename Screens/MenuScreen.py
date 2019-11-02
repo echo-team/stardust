@@ -18,14 +18,27 @@ class MenuScreen(arcade.View):
         self.window = window
         windowWidth, windowHeight = window.get_size()
 
-        self.items = ['Start', 'Continue', 'High scores', 'Settings', 'Exit']
+        self.items = [
+            { 'name': 'Start' },
+            { 'name': 'Continue', 'listener': self.resume },
+            { 'name': 'High scores' },
+            { 'name': 'Settings' },
+            { 'name': 'Exit' }
+        ]
+
         self.menu = Menu((windowWidth - itemWidth) / 2, (windowHeight - itemHeight * 5) / 2, itemWidth, itemHeight)
         for item in self.items:
-            self.menu.addItem(item)
-        
+            self.menu.addItem(item['name'])
         self.highlight.move(self.menu.items[0])
+
+        self.previousScreen = None
     
-    def show(self):
+    def resume(self):
+        if self.previousScreen !== None:
+            self.window.show_view(self.previousScreen)
+    
+    def show(self, previousScreen):
+        self.previousScreen = previousScreen
         self.window.show_view(self)
 
     def on_draw(self):
@@ -40,6 +53,8 @@ class MenuScreen(arcade.View):
         elif key == arcade.key.DOWN:
             self.focused = (self.focused + 1) % len(self.items)
             self.highlight.move(self.menu.items[self.focused])
+        elif key == arcade.key.ENTER:
+            self.items[self.focused]['listener']()
 
     def on_mouse_motion(self, x, y, dx, dy):
         covered = self.highlight.mouseMove(x, y, self.menu.items)

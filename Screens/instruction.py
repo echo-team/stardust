@@ -25,7 +25,7 @@ class Instruction(GameScreen):
         arcade.draw_text("Press Enter to continue", pos_x, pos_y - 100, arcade.color.WHITE, font_size=14)
 
     def on_key_press(self, key, modifiers):
-        super().show_menu_if_esc(key)
+        super().show_menu_if_esc(key, self)
 
         if key == arcade.key.ENTER:
             self.window.screens['level1'].show()
