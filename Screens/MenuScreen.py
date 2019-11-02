@@ -1,11 +1,11 @@
 import arcade
 
 from PIL import ImageFont
-from Menu import Menu
-from Highlight import Highlight
+from Widgets.Menu import Menu
+from Widgets.Highlight import Highlight
 
 
-class MenuScreen:
+class MenuScreen(arcade.View):
 
     def __init__(self, window):
         font = ImageFont.truetype('arial.ttf', 15)
@@ -24,12 +24,17 @@ class MenuScreen:
             self.menu.addItem(item)
         
         self.highlight.move(self.menu.items[0])
+    
+    def show(self):
+        self.window.show_view(self)
 
-    def draw(self):
+    def on_draw(self):
+        arcade.start_render()
         self.menu.draw()
         self.highlight.draw()
+        arcade.finish_render()
     
-    def keypress(self, key, modifier):
+    def on_key_press(self, key, modifier):
         if key == arcade.key.UP:
             self.focused = (self.focused - 1) % len(self.items)
             self.highlight.move(self.menu.items[self.focused])
@@ -37,7 +42,7 @@ class MenuScreen:
             self.focused = (self.focused + 1) % len(self.items)
             self.highlight.move(self.menu.items[self.focused])
 
-    def mousemove(self, x, y, dx, dy):
+    def on_mouse_motion(self, x, y, dx, dy):
         covered = self.highlight.mouseMove(x, y, self.menu.items)
         if covered != None:
             self.focused = covered[0]
