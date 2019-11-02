@@ -9,6 +9,7 @@ from Screens.level_2_view import Lvl_2
 from Screens.level_3_view import Lvl_3
 from Screens.game_over_view import GameOverView
 from Screens.victory_view import VictoryView
+from Screens.MenuScreen import MenuScreen
 
 # TODO: remove for Linux
 from ctypes import windll
@@ -27,7 +28,8 @@ class Window(arcade.Window):
             'level2': Lvl_2(),
             'level3': Lvl_3(),
             'gameover': GameOverView(),
-            'victory': VictoryView()
+            'victory': VictoryView(),
+            'menu': MenuScreen(self)
         }
 
 window = Window(SCREEN_WIDTH, SCREEN_HEIGHT)

@@ -2,8 +2,9 @@ import arcade
 import random
 import os
 import math
-import time
+
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPRITE_SCALING_COIN, SPRITE_SCALING_PLAYER, MOVEMENT_SPEED
+from Screens.GameScreen import GameScreen
 from Coin_Folder.coin import Coin
 from Coin_Folder.bonus_coin import Bonus_Coin
 
@@ -11,12 +12,11 @@ file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
 
 
-class Lvl_2(arcade.View):
+class Lvl_2(GameScreen):
 
     def __init__(self):
         super().__init__()
 
-        self.time_taken = 0
         self.frame_count = 0
 
         self.player_list = arcade.SpriteList()
@@ -33,8 +33,7 @@ class Lvl_2(arcade.View):
         self.score = 0
         self.level = 2
         self.hp = 3
-        self.time = time.time()
-        self.time2 = 0
+        self.time = 0
 
         # Create the coins
         for i in range(25):
@@ -89,7 +88,7 @@ class Lvl_2(arcade.View):
         arcade.draw_text(output, 10, 25, arcade.color.WHITE, 14)
         output = f"HP: {self.hp}"
         arcade.draw_text(output, 10, 40, arcade.color.WHITE, 14)
-        output = f"Time left: {10 - self.time2}"
+        output = f"Time left: {10 - math.floor(self.time)}"
         arcade.draw_text(output, 10, 55, arcade.color.WHITE, 14)
 
 
@@ -100,6 +99,8 @@ class Lvl_2(arcade.View):
         self.player_sprite.center_y = y
 
     def on_key_press(self, key, modifiers):
+        super().show_menu_if_esc(key, self)
+
         # Called whenever the user presses a key.
         if key == arcade.key.LEFT:
             self.player_sprite.change_x = -MOVEMENT_SPEED
@@ -118,9 +119,7 @@ class Lvl_2(arcade.View):
             self.player_sprite.change_y = 0
 
     def on_update(self, delta_time: float):
-        self.time_taken += delta_time
-
-        self.time2 = int(time.time() - self.time)
+        self.time += delta_time
 
         # Move the player
         self.player_sprite.center_y += self.player_sprite.change_y
@@ -157,5 +156,5 @@ class Lvl_2(arcade.View):
             bonus_coin.remove_from_sprite_lists()
             self.hp += 1
 
-        if self.time2 == 10:
+        if self.time > 10:
             self.window.screens['level3'].show(self.score)

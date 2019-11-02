@@ -5,15 +5,12 @@ import math
 from constants import SCREEN_WIDTH, SCREEN_TITLE, SCREEN_HEIGHT, SPRITE_SCALING_PLAYER, SPRITE_SCALING_LASER_BOSS, \
     SPRITE_SCALING_BOSS, SPRITE_SCALING_COIN, SPRITE_SCALING_LASER, MOVEMENT_SPEED, \
     BULLET_SPEED, BOSS_BULLET_SPEED
-#from game_over_view import GameOverView
-#from .victory_view import VictoryView
-
+from Screens.GameScreen import GameScreen
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
 
-
-class Lvl_3(arcade.View):
+class Lvl_3(GameScreen):
 
     def __init__(self):
         super().__init__()
@@ -88,6 +85,8 @@ class Lvl_3(arcade.View):
         self.bullet_list.append(bullet)
 
     def on_key_press(self, key, modifiers):
+        super().show_menu_if_esc(key, self)
+
         # Called whenever the user presses a key.
         if key == arcade.key.LEFT:
             self.player_sprite.change_x = -MOVEMENT_SPEED
