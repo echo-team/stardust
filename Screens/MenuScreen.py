@@ -19,7 +19,7 @@ class MenuScreen(arcade.View):
         windowWidth, windowHeight = window.get_size()
 
         self.items = [
-            { 'name': 'Start' },
+            { 'name': 'Start', 'listener': self.start },
             { 'name': 'Continue', 'listener': self.resume },
             { 'name': 'High scores' },
             { 'name': 'Settings' },
@@ -34,8 +34,11 @@ class MenuScreen(arcade.View):
         self.previousScreen = None
     
     def resume(self):
-        if self.previousScreen !== None:
+        if self.previousScreen != None:
             self.window.show_view(self.previousScreen)
+    
+    def start(self):
+        self.window.screens['instruction'].show()
     
     def show(self, previousScreen):
         self.previousScreen = previousScreen
