@@ -21,7 +21,9 @@ class MenuScreen(arcade.View):
 
         self.titleFontSize = 40
         self.title = { 'x': (windowWidth - itemWidth) / 2, 'y': windowHeight - (windowHeight - titleHeight - itemHeight * 5) / 2 }
+        self.titleText = 'STAR'
         self.subtitle = { 'x': self.title['x'] + titleWidth, 'y': self.title['y'] - titleHeight }
+        self.subtitleText = 'DUST'
 
         self.focused = 0
         self.highlight = Highlight()
@@ -48,17 +50,27 @@ class MenuScreen(arcade.View):
     def start(self):
         self.window.screens['instruction'].show()
     
-    def show(self, previousScreen):
+    def show(self, previousScreen, victory = None):
         self.previousScreen = previousScreen
         self.window.show_view(self)
+
+        if victory == None:
+            self.titleText = 'STAR'
+            self.subtitleText = 'DUST'
+        elif victory:
+            self.titleText = 'YOU'
+            self.subtitleText = 'WIN'
+        else:
+            self.titleText = 'GAME'
+            self.subtitleText = 'OVER'
 
     def on_draw(self):
         arcade.start_render()
         arcade.draw_text(
-            'STAR', self.title['x'], self.title['y'],
+            self.titleText, self.title['x'], self.title['y'],
             arcade.color.WHITE, self.titleFontSize, font_name="../assets/fonts/lemon_milk.otf")
         arcade.draw_text(
-            'DUST', self.subtitle['x'], self.subtitle['y'],
+            self.subtitleText, self.subtitle['x'], self.subtitle['y'],
             arcade.color.WHITE, self.titleFontSize, font_name="../assets/fonts/lemon_milk.otf")
 
         self.menu.draw()
