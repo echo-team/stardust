@@ -32,7 +32,7 @@ class Lvl_1(GameScreen):
         self.level = 1
 
         # Create the coins
-        for i in range(20):
+        for i in range(15):
             # Create the coin instance
             coin = Coin("../assets/images/ammo_box.png", SPRITE_SCALING_COIN)
 
