@@ -55,10 +55,10 @@ class Lvl_3(GameScreen):
     def on_draw(self):
         """ Draw everything """
         arcade.start_render()
-        self.player_list.draw()
         self.bullet_list.draw()
-        self.boss_list.draw()
+        self.player_list.draw()
         self.bullet_boss_list.draw()
+        self.boss_list.draw()
 
         # Put the text on the screen.
         output = f"Bullets: {self.bullet_amount}"
