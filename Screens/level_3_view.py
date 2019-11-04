@@ -164,7 +164,7 @@ class Lvl_3(GameScreen):
             boss.angle = math.degrees(angle) + 90
 
             # Shoot every 60 frames change of shooting each frame
-            if self.frame_count % 60 == 0:
+            if self.frame_count % 45 == 0:
                 bullet_boss = arcade.Sprite("../assets/images/boss_bullet.png", SPRITE_SCALING_LASER_BOSS)
                 bullet_boss.center_x = start_x
                 bullet_boss.center_y = start_y
