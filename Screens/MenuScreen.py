@@ -57,6 +57,7 @@ class MenuScreen(arcade.View):
         self.window.screens['instruction'].show()
     
     def show(self, previousScreen, victory = None, score = 0):
+        self.window.set_mouse_visible(True)
         self.previousScreen = previousScreen
         self.window.show_view(self)
 
@@ -88,7 +89,6 @@ class MenuScreen(arcade.View):
                 str(self.score), self.scoreNumber['x'], self.scoreNumber['y'],
                 arcade.color.WHITE, self.scoreFontSize, font_name="../assets/fonts/source_code_pro.ttf")
 
-
         self.menu.draw()
         self.highlight.draw()
     
@@ -106,3 +106,6 @@ class MenuScreen(arcade.View):
         covered = self.highlight.mouseMove(x, y, self.menu.items)
         if covered != None:
             self.focused = covered[0]
+    
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        self.items[self.focused]['listener']()
