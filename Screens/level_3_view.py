@@ -55,10 +55,10 @@ class Lvl_3(GameScreen):
     def on_draw(self):
         """ Draw everything """
         arcade.start_render()
-        self.player_list.draw()
         self.bullet_list.draw()
-        self.boss_list.draw()
+        self.player_list.draw()
         self.bullet_boss_list.draw()
+        self.boss_list.draw()
 
         # Put the text on the screen.
         output = f"Bullets: {self.bullet_amount}"
@@ -82,6 +82,7 @@ class Lvl_3(GameScreen):
         bullet.center_x = self.player_sprite.center_x
         bullet.center_y = self.player_sprite.center_y
         bullet.change_y = BULLET_SPEED
+        self.bullet_amount -= 1
         self.bullet_list.append(bullet)
 
     def on_key_press(self, key, modifiers):
@@ -101,6 +102,7 @@ class Lvl_3(GameScreen):
             bullet.center_x = self.player_sprite.center_x
             bullet.center_y = self.player_sprite.center_y + 30
             bullet.change_y = BULLET_SPEED
+            self.bullet_amount -= 1
             self.bullet_list.append(bullet)
 
     def on_key_release(self, key, modifiers):
@@ -162,7 +164,7 @@ class Lvl_3(GameScreen):
             boss.angle = math.degrees(angle) + 90
 
             # Shoot every 60 frames change of shooting each frame
-            if self.frame_count % 60 == 0:
+            if self.frame_count % 45 == 0:
                 bullet_boss = arcade.Sprite("../assets/images/boss_bullet.png", SPRITE_SCALING_LASER_BOSS)
                 bullet_boss.center_x = start_x
                 bullet_boss.center_y = start_y
@@ -190,12 +192,11 @@ class Lvl_3(GameScreen):
 
         for bullet in bullet_player_hit_list:
             self.boss_hp -= 1
-            self.bullet_amount -= 1
             bullet.remove_from_sprite_lists()
 
         self.bullet_list.update()
         
-        if self.hp == 0:
+        if self.hp == 0 or self.bullet_amount == 0:
             self.window.screens['menu'].show(None, victory = False)
 
         if self.boss_hp == 0:

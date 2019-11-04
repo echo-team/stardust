@@ -32,7 +32,7 @@ class Lvl_1(GameScreen):
         self.level = 1
 
         # Create the coins
-        for i in range(20):
+        for i in range(15):
             # Create the coin instance
             coin = Coin("../assets/images/ammo_box.png", SPRITE_SCALING_COIN)
 
@@ -50,7 +50,7 @@ class Lvl_1(GameScreen):
         arcade.get_window().show_view(self)
 
     def on_show(self):
-        arcade.set_background_color(arcade.color.BLACK_OLIVE)
+        arcade.set_background_color(arcade.color.BLACK)
         # Don't show the mouse cursor
         self.window.set_mouse_visible(False)
 

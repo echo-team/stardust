@@ -7,8 +7,6 @@ from Screens.instruction import Instruction
 from Screens.level_1_view import Lvl_1
 from Screens.level_2_view import Lvl_2
 from Screens.level_3_view import Lvl_3
-from Screens.game_over_view import GameOverView
-from Screens.victory_view import VictoryView
 from Screens.MenuScreen import MenuScreen
 
 # TODO: remove for Linux
@@ -27,8 +25,6 @@ class Window(arcade.Window):
             'level1': Lvl_1(),
             'level2': Lvl_2(),
             'level3': Lvl_3(),
-            'gameover': GameOverView(),
-            'victory': VictoryView(),
             'menu': MenuScreen(self)
         }
 

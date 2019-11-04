@@ -20,7 +20,7 @@ class MenuScreen(arcade.View):
         windowWidth, windowHeight = window.get_size()
 
         self.titleFontSize = 40
-        self.title = { 'x': (windowWidth - itemWidth) / 2, 'y': windowHeight - (windowHeight - titleHeight - itemHeight * 5) / 2 }
+        self.title = { 'x': (windowWidth - itemWidth) / 2, 'y': windowHeight - (windowHeight - titleHeight - itemHeight * 3) / 2 }
         self.titleText = 'STAR'
         self.subtitle = { 'x': self.title['x'] + titleWidth, 'y': self.title['y'] - titleHeight }
         self.subtitleText = 'DUST'
@@ -36,9 +36,7 @@ class MenuScreen(arcade.View):
         self.items = [
             { 'name': 'Start', 'listener': self.start },
             { 'name': 'Continue', 'listener': self.resume },
-            { 'name': 'High scores' },
-            { 'name': 'Settings' },
-            { 'name': 'Exit' }
+            { 'name': 'Exit', 'listener': self.exit }
         ]
 
         self.menu = Menu(self.title['x'], self.title['y'] - itemHeight - 20, itemWidth, itemHeight)
@@ -47,6 +45,9 @@ class MenuScreen(arcade.View):
         self.highlight.move(self.menu.items[0])
 
         self.previousScreen = None
+    
+    def exit(self):
+        arcade.close_window()
     
     def resume(self):
         if self.previousScreen != None:
@@ -57,6 +58,7 @@ class MenuScreen(arcade.View):
         self.window.screens['instruction'].show()
     
     def show(self, previousScreen, victory = None, score = 0):
+        self.window.set_mouse_visible(True)
         self.previousScreen = previousScreen
         self.window.show_view(self)
 
@@ -88,7 +90,6 @@ class MenuScreen(arcade.View):
                 str(self.score), self.scoreNumber['x'], self.scoreNumber['y'],
                 arcade.color.WHITE, self.scoreFontSize, font_name="../assets/fonts/source_code_pro.ttf")
 
-
         self.menu.draw()
         self.highlight.draw()
     
@@ -106,3 +107,6 @@ class MenuScreen(arcade.View):
         covered = self.highlight.mouseMove(x, y, self.menu.items)
         if covered != None:
             self.focused = covered[0]
+    
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        self.items[self.focused]['listener']()

@@ -37,7 +37,7 @@ class Lvl_2(GameScreen):
         self.time = 0
 
         # Create the coins
-        for i in range(25):
+        for i in range(15):
             # Create the coin instance
             coin = Coin("../assets/images/ammo_box.png", SPRITE_SCALING_COIN)
 
@@ -71,7 +71,7 @@ class Lvl_2(GameScreen):
         arcade.get_window().show_view(self)
         
     def on_show(self):
-        arcade.set_background_color(arcade.color.BLACK_OLIVE)
+        arcade.set_background_color(arcade.color.BLACK)
         # Don't show the mouse cursor
         self.window.set_mouse_visible(False)
 
@@ -157,5 +157,5 @@ class Lvl_2(GameScreen):
             bonus_coin.remove_from_sprite_lists()
             self.hp += 1
 
-        if self.time > 10:
+        if self.time > 10 or len(self.coin_list) == 0:
             self.window.screens['level3'].show(self.score, self.hp)
