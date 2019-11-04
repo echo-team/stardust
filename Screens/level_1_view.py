@@ -60,9 +60,9 @@ class Lvl_1(GameScreen):
 
         # Put the text on the screen.
         output = f"Score: {self.score}"
-        arcade.draw_text(output, 10, 10, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 10, arcade.color.WHITE, 14, font_name='../assets/fonts/source_code_pro.ttf')
         output = f"Level: {self.level}"
-        arcade.draw_text(output, 10, 25, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 25, arcade.color.WHITE, 14, font_name='../assets/fonts/source_code_pro.ttf')
 
     def on_mouse_motion(self, x, y, dx, dy):
 

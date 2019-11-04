@@ -62,13 +62,13 @@ class Lvl_3(GameScreen):
 
         # Put the text on the screen.
         output = f"Bullets: {self.bullet_amount}"
-        arcade.draw_text(output, 10, 10, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 10, arcade.color.WHITE, 14, font_name='../assets/fonts/source_code_pro.ttf')
         output = f"Level: {self.level}"
-        arcade.draw_text(output, 10, 25, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 25, arcade.color.WHITE, 14, font_name='../assets/fonts/source_code_pro.ttf')
         output = f"HP: {self.hp}"
-        arcade.draw_text(output, 10, 40, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 40, arcade.color.WHITE, 14, font_name='../assets/fonts/source_code_pro.ttf')
         output = f"Boss's hp: {self.boss_hp}"
-        arcade.draw_text(output, 10, 55, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 55, arcade.color.WHITE, 14, font_name='../assets/fonts/source_code_pro.ttf')
 
     def on_mouse_motion(self, x, y, dx, dy):
 
