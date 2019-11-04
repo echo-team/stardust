@@ -35,5 +35,5 @@ class Window(arcade.Window):
 window = Window(SCREEN_WIDTH, SCREEN_HEIGHT)
 window.total_score = 0
 window.level = 1
-window.screens['instruction'].show()
+window.screens['menu'].show(None)
 arcade.run()
