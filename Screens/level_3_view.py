@@ -25,7 +25,7 @@ class Lvl_3(GameScreen):
         self.bullet_boss_list = arcade.SpriteList()
 
         # Set up the player info
-        self.player_sprite = arcade.Sprite("../assets/images/tyan.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("../assets/images/rocket.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_sprite.change_x = 0
@@ -37,7 +37,7 @@ class Lvl_3(GameScreen):
         self.level = 3
 
         # Create the boss
-        boss = arcade.Sprite("../assets/images/boss.png", SPRITE_SCALING_BOSS)
+        boss = arcade.Sprite("../assets/images/ufo.png", SPRITE_SCALING_BOSS)
         boss.center_x = SCREEN_WIDTH / 2
         boss.center_y = SCREEN_HEIGHT - boss.height / 4
         self.boss_list.append(boss)
@@ -78,7 +78,7 @@ class Lvl_3(GameScreen):
 
     def on_mouse_press(self, x, y, button, modifiers):
 
-        bullet = arcade.Sprite("../assets/images/laser.png", SPRITE_SCALING_LASER)
+        bullet = arcade.Sprite("../assets/images/bullet.png", SPRITE_SCALING_LASER)
         bullet.center_x = self.player_sprite.center_x
         bullet.center_y = self.player_sprite.center_y
         bullet.change_y = BULLET_SPEED
@@ -97,7 +97,7 @@ class Lvl_3(GameScreen):
         elif key == arcade.key.DOWN:
             self.player_sprite.change_y = -MOVEMENT_SPEED
         elif key == arcade.key.SPACE and self.level == 3:
-            bullet = arcade.Sprite("../assets/images/laser.png", SPRITE_SCALING_LASER)
+            bullet = arcade.Sprite("../assets/images/boss_bullet.png", SPRITE_SCALING_LASER)
             bullet.center_x = self.player_sprite.center_x
             bullet.center_y = self.player_sprite.center_y + 30
             bullet.change_y = BULLET_SPEED
@@ -163,7 +163,7 @@ class Lvl_3(GameScreen):
 
             # Shoot every 60 frames change of shooting each frame
             if self.frame_count % 60 == 0:
-                bullet_boss = arcade.Sprite("../assets/images/laser_boss.png", SPRITE_SCALING_LASER_BOSS)
+                bullet_boss = arcade.Sprite("../assets/images/boss_bullet.png", SPRITE_SCALING_LASER_BOSS)
                 bullet_boss.center_x = start_x
                 bullet_boss.center_y = start_y
 

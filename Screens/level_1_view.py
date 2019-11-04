@@ -22,7 +22,7 @@ class Lvl_1(GameScreen):
         self.coin_list = arcade.SpriteList()
 
         # Set up the player info
-        self.player_sprite = arcade.Sprite("../assets/images/tyan.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("../assets/images/rocket.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_sprite.change_x = 0
@@ -34,7 +34,7 @@ class Lvl_1(GameScreen):
         # Create the coins
         for i in range(20):
             # Create the coin instance
-            coin = Coin("../assets/images/hooi_dlya_tyan.png", SPRITE_SCALING_COIN)
+            coin = Coin("../assets/images/ammo_box.png", SPRITE_SCALING_COIN)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
