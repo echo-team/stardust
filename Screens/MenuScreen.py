@@ -20,7 +20,7 @@ class MenuScreen(arcade.View):
         windowWidth, windowHeight = window.get_size()
 
         self.titleFontSize = 40
-        self.title = { 'x': (windowWidth - itemWidth) / 2, 'y': windowHeight - (windowHeight - titleHeight - itemHeight * 5) / 2 }
+        self.title = { 'x': (windowWidth - itemWidth) / 2, 'y': windowHeight - (windowHeight - titleHeight - itemHeight * 3) / 2 }
         self.titleText = 'STAR'
         self.subtitle = { 'x': self.title['x'] + titleWidth, 'y': self.title['y'] - titleHeight }
         self.subtitleText = 'DUST'
@@ -36,9 +36,7 @@ class MenuScreen(arcade.View):
         self.items = [
             { 'name': 'Start', 'listener': self.start },
             { 'name': 'Continue', 'listener': self.resume },
-            { 'name': 'High scores' },
-            { 'name': 'Settings' },
-            { 'name': 'Exit' }
+            { 'name': 'Exit', 'listener': self.exit }
         ]
 
         self.menu = Menu(self.title['x'], self.title['y'] - itemHeight - 20, itemWidth, itemHeight)
@@ -47,6 +45,9 @@ class MenuScreen(arcade.View):
         self.highlight.move(self.menu.items[0])
 
         self.previousScreen = None
+    
+    def exit(self):
+        arcade.close_window()
     
     def resume(self):
         if self.previousScreen != None:
