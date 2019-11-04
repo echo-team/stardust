@@ -25,7 +25,7 @@ class Lvl_2(GameScreen):
         self.bonus_coin_list = arcade.SpriteList()
 
         # Set up the player info
-        self.player_sprite = arcade.Sprite("../assets/images/tyan.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("../assets/images/rocket.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_sprite.change_x = 0
@@ -39,7 +39,7 @@ class Lvl_2(GameScreen):
         # Create the coins
         for i in range(25):
             # Create the coin instance
-            coin = Coin("../assets/images/hooi_dlya_tyan.png", SPRITE_SCALING_COIN)
+            coin = Coin("../assets/images/ammo_box.png", SPRITE_SCALING_COIN)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
@@ -52,7 +52,7 @@ class Lvl_2(GameScreen):
 
         for i in range(4):
             # Create the coin instance
-            bonus_coin = Bonus_Coin("../assets/images/bonus_hooi.png", SPRITE_SCALING_COIN)
+            bonus_coin = Bonus_Coin("../assets/images/heal_box.png", SPRITE_SCALING_COIN)
 
             # Position the center of the circle the coin will orbit
             bonus_coin.circle_center_x = random.randrange(SCREEN_WIDTH)
