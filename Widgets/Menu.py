@@ -14,14 +14,14 @@ class MenuItem:
     def draw(self):
         arcade.draw_text(
             self.text, self.x, self.y + (self.height - self.fontSize) / 2,
-            arcade.color.WHITE,
-            self.fontSize, self.fontWeight, 'left', 'arial')
+            arcade.color.WHITE, self.fontSize,
+            font_name = '../assets/fonts/source_code_pro.ttf')
 
 class Menu:
 
     def __init__(self, x, y, itemWidth, itemHeight):
         self.x = x
-        self.y = arcade.get_window().get_size()[1] - y
+        self.y = y
         self.itemWidth = itemWidth
         self.itemHeight = itemHeight
         self.items = []

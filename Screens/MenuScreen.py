@@ -8,15 +8,23 @@ from Widgets.Highlight import Highlight
 class MenuScreen(arcade.View):
 
     def __init__(self, window):
-        font = ImageFont.truetype('arial.ttf', 15)
+        font = ImageFont.truetype('../assets/fonts/source_code_pro.ttf', 15)
         itemWidth, itemHeight = font.getsize('Hight scores')
         itemHeight += 10
 
-        self.focused = 0
-        self.highlight = Highlight()
+        font = ImageFont.truetype('../assets/fonts/lemon_milk.otf', 40)
+        itemWidth, tmpHeight = font.getsize('STARUST')
+        titleWidth, titleHeight = font.getsize('STAR')
 
         self.window = window
         windowWidth, windowHeight = window.get_size()
+
+        self.titleFontSize = 40
+        self.title = { 'x': (windowWidth - itemWidth) / 2, 'y': windowHeight - (windowHeight - titleHeight - itemHeight * 5) / 2 }
+        self.subtitle = { 'x': self.title['x'] + titleWidth, 'y': self.title['y'] - titleHeight }
+
+        self.focused = 0
+        self.highlight = Highlight()
 
         self.items = [
             { 'name': 'Start', 'listener': self.start },
@@ -26,7 +34,7 @@ class MenuScreen(arcade.View):
             { 'name': 'Exit' }
         ]
 
-        self.menu = Menu((windowWidth - itemWidth) / 2, (windowHeight - itemHeight * 5) / 2, itemWidth, itemHeight)
+        self.menu = Menu(self.title['x'], self.title['y'] - itemHeight - 20, itemWidth, itemHeight)
         for item in self.items:
             self.menu.addItem(item['name'])
         self.highlight.move(self.menu.items[0])
@@ -46,6 +54,13 @@ class MenuScreen(arcade.View):
 
     def on_draw(self):
         arcade.start_render()
+        arcade.draw_text(
+            'STAR', self.title['x'], self.title['y'],
+            arcade.color.WHITE, self.titleFontSize, font_name="../assets/fonts/lemon_milk.otf")
+        arcade.draw_text(
+            'DUST', self.subtitle['x'], self.subtitle['y'],
+            arcade.color.WHITE, self.titleFontSize, font_name="../assets/fonts/lemon_milk.otf")
+
         self.menu.draw()
         self.highlight.draw()
     
