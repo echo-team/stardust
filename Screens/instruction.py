@@ -1,6 +1,7 @@
 import arcade
 import os
 
+from PIL import ImageFont
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from Screens.GameScreen import GameScreen
 
@@ -8,6 +9,24 @@ file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
 
 class Instruction(GameScreen):
+
+    def __init__(self):
+        super().__init__()
+
+        font = ImageFont.truetype('../assets/fonts/source_code_pro.ttf', 15)
+        text_width, text_height = font.getsize('Press mouse\'s button or space to shoot')
+
+        self.text = [
+            'Use mouse or arrows to move',
+            'Press mouse\'s button or space to shoot',
+            'Press Esc to pause',
+            'Press Enter to continue'
+        ]
+        self.text_pos = {
+            'x': (SCREEN_WIDTH - text_width) / 2,
+            'y': (SCREEN_HEIGHT - (text_height + 5) * len(self.text)) / 2,
+            'delta': 20
+        }
 
     def show(self):
         arcade.get_window().show_view(self)
@@ -17,12 +36,11 @@ class Instruction(GameScreen):
 
     def on_draw(self):
         arcade.start_render()
-        pos_x = SCREEN_WIDTH / 5
-        pos_y = SCREEN_HEIGHT / 2 + 60
-        arcade.draw_text("Use mouse or arrows to move", pos_x, pos_y, arcade.color.WHITE, font_size=14)
-        arcade.draw_text("Press mouse's button or space to shoot", pos_x, pos_y - 20, arcade.color.WHITE, font_size=14)
-        arcade.draw_text("Press Esc to pause", pos_x, pos_y - 40, arcade.color.WHITE, font_size=14)
-        arcade.draw_text("Press Enter to continue", pos_x, pos_y - 100, arcade.color.WHITE, font_size=14)
+        for index in range(len(self.text)):
+            arcade.draw_text(
+                self.text[index],
+                self.text_pos['x'], SCREEN_HEIGHT - self.text_pos['y'] - index * self.text_pos['delta'],
+                arcade.color.WHITE, font_size=15, font_name='../assets/fonts/source_code_pro.ttf')
 
     def on_key_press(self, key, modifiers):
         super().show_menu_if_esc(key, self)
