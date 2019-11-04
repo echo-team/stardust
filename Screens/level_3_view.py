@@ -14,7 +14,8 @@ class Lvl_3(GameScreen):
 
     def __init__(self):
         super().__init__()
-
+    
+    def init(self, bullet_amount, hp):
         self.time_taken = 0
         self.frame_count = 0
 
@@ -30,9 +31,9 @@ class Lvl_3(GameScreen):
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
         self.player_list.append(self.player_sprite)
-        self.bullet_amount = 0
+        self.bullet_amount = bullet_amount
         self.boss_hp = 20
-        self.hp = 0
+        self.hp = hp
         self.level = 3
 
         # Create the boss
@@ -41,9 +42,8 @@ class Lvl_3(GameScreen):
         boss.center_y = SCREEN_HEIGHT - boss.height / 4
         self.boss_list.append(boss)
     
-    def show(self, bullet_amount):
-        self.bullet_amount = bullet_amount
-        self.hp = 20
+    def show(self, bullet_amount, hp):
+        self.init(bullet_amount, hp)
         arcade.get_window().show_view(self)
 
     def on_show(self):

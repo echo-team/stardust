@@ -17,6 +17,7 @@ class Lvl_2(GameScreen):
     def __init__(self):
         super().__init__()
 
+    def init(self, score):
         self.frame_count = 0
 
         self.player_list = arcade.SpriteList()
@@ -30,7 +31,7 @@ class Lvl_2(GameScreen):
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
         self.player_list.append(self.player_sprite)
-        self.score = 0
+        self.score = score
         self.level = 2
         self.hp = 3
         self.time = 0
@@ -66,7 +67,7 @@ class Lvl_2(GameScreen):
             self.bonus_coin_list.append(bonus_coin)
 
     def show(self, score):
-        self.score = score
+        self.init(score)
         arcade.get_window().show_view(self)
         
     def on_show(self):
@@ -157,4 +158,4 @@ class Lvl_2(GameScreen):
             self.hp += 1
 
         if self.time > 10:
-            self.window.screens['level3'].show(self.score)
+            self.window.screens['level3'].show(self.score, self.hp)

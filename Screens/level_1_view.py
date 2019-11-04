@@ -13,7 +13,8 @@ class Lvl_1(GameScreen):
 
     def __init__(self):
         super().__init__()
-
+    
+    def init(self):
         self.time_taken = 0
         self.frame_count = 0
 
@@ -45,6 +46,7 @@ class Lvl_1(GameScreen):
             self.coin_list.append(coin)
 
     def show(self):
+        self.init()
         arcade.get_window().show_view(self)
 
     def on_show(self):
